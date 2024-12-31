@@ -518,7 +518,7 @@ var calendarFormatter = {
 const ganzhi = '子丑寅卯辰巳午未申酉戌亥';
 const xiaoshi = '初正';
 // const jike = '一二三四五';
-const jike = '一二三四';
+const jike = '初一二三';
 function time_to_shichen(hour, minute) {
 	// return ganzhi.charAt((hour + 1) % 24 / 2) + xiaoshi.charAt((hour + 1) % 2) + jike.charAt(minute / 14.4) + '刻';
 	return ganzhi.charAt((hour + 1) % 24 / 2) + xiaoshi.charAt((hour + 1) % 2) + jike.charAt(minute / 15) + '刻';

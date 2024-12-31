@@ -440,8 +440,17 @@ function solar2lunar(y, m, d) { // 参数区间1900.1.31~2100.12.31
 		isTerm = true
 		Term = solarTerm[m * 2 - 2]
 	}
-	if (secondNode === d) {
+	else if (secondNode === d) {
 		isTerm = true
+		Term = solarTerm[m * 2 - 1]
+	}
+	else if (firstNode < d && secondNode > d) {
+		Term = solarTerm[m * 2 - 2]
+	}
+	else if (firstNode > d) {
+		Term = solarTerm[(m * 2 - 3 + 24) % 24]
+	}
+	else {
 		Term = solarTerm[m * 2 - 1]
 	}
 	// 日柱 当月一日与 1900/1/1 相差天数

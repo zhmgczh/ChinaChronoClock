@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
 	<meta HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate">
@@ -8,9 +9,10 @@
 	<meta charset="UTF-8">
 	<meta name="google-site-verification" content="LxuOudJbIfQC4XGqAbPdZp_UAzL0IHJuWJWyp2ISwHo" />
 	<meta name="baidu-site-verification" content="code-9XQnizEi5v" />
-	<meta name="sogou_site_verification" content="6zVRNtO7pp"/>
-	<meta name="keywords"  content="中國,中国,時辰,时辰,計時法,计时法,鐘,钟" />
-	<meta name="description" content="提供傳統中國計時法的顯示服務和五個傳統中國時區的標準時間，適合用作屏幕保護、時間顯示、占卜預測等。提供传统中国计时法的显示服务和五个传统中国时区的标准时间，适合用作屏幕保护、时间显示、占卜预测等。" />
+	<meta name="sogou_site_verification" content="6zVRNtO7pp" />
+	<meta name="keywords" content="中國,中国,時辰,时辰,計時法,计时法,鐘,钟" />
+	<meta name="description"
+		content="提供傳統中國計時法的顯示服務和五個傳統中國時區的標準時間，適合用作屏幕保護、時間顯示、占卜預測等。提供传统中国计时法的显示服务和五个传统中国时区的标准时间，适合用作屏幕保护、时间显示、占卜预测等。" />
 	<!-- <link rel="stylesheet" href="style.css" /> -->
 	<title>中國時辰鐘</title>
 	<script src="clock.js"></script>
@@ -135,8 +137,8 @@
 		}
 		document.addEventListener('keyup', process_keyup);
 		document.onkeyup = process_keyup;
-			// document.onkeydown=null;
-			// document.onkeypress=null;
+		// document.onkeydown=null;
+		// document.onkeypress=null;
 	</script>
 	<style type="text/css">
 		.clockModule {
@@ -151,16 +153,19 @@
 			font-weight: bold;
 			text-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
 		}
+
 		.canvasbox {
 			background: #FFFFFF;
 			border-radius: 50%;
 			overflow: hidden;
 		}
+
 		.titletime {
 			font-size: 16px;
 			font-weight: bold;
 			margin: 10px 0px;
 		}
+
 		.clockbg {
 			background: url(images/bg2.jpg);
 			width: 100%;
@@ -169,6 +174,7 @@
 			background-size: 100% 100%;
 			/* overflow-y:hidden; */
 		}
+
 		.clockstyle {
 			/* padding: 20px 0px; */
 			padding: 1% 0% 1% 0%;
@@ -192,6 +198,7 @@
 			box-shadow: inset 0px 5px 8px rgba(255, 255, 255, 0.5);
 			align-content: center;
 		}
+
 		.titledate {
 			font-size: 32px;
 			text-align: center;
@@ -201,6 +208,7 @@
 			position: relative;
 			top: 15%
 		}
+
 		.fanhui {
 			background: url(images/cz2.png);
 			position: absolute;
@@ -214,9 +222,8 @@
 		}
 	</style>
 	<link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
-	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-	<script>LA.init({id: "Jdy4fuyomxQqAw3y",ck: "Jdy4fuyomxQqAw3y"})</script>
 </head>
+
 <body class="clockbg" id="clockbg">
 	<div id="title_prompt" class="titledate">
 		<font size="20">中國時辰鐘</font><br />
@@ -322,10 +329,20 @@
 	</script>
 	</script>
 	<script>
-		(function () {
-			var src = "https://s.ssl.qhres2.com/ssl/ab77b6ea7f3fbf79.js";
-			document.write('<script src="' + src + '" id="sozz"><\/script>');
-		})();
+			(function () {
+				var src = "https://s.ssl.qhres2.com/ssl/ab77b6ea7f3fbf79.js";
+				document.write('<script src="' + src + '" id="sozz"><\/script>');
+			})();
+	</script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-F0QTMNSQ6P"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-F0QTMNSQ6P');
 	</script>
 </body>
+
 </html>

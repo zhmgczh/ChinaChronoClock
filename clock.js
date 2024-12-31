@@ -37,28 +37,32 @@ var solarMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 * @Array Of Property trans['甲','乙','丙','丁','戊','己','庚','辛','壬','癸']
 * @return Cn string
 */
-var Gan = ['\u7532', '\u4e59', '\u4e19', '\u4e01', '\u620a', '\u5df1', '\u5e9a', '\u8f9b', '\u58ec', '\u7678']
+// var Gan = ['\u7532', '\u4e59', '\u4e19', '\u4e01', '\u620a', '\u5df1', '\u5e9a', '\u8f9b', '\u58ec', '\u7678']
+var Gan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']
 /**
 * 天干地支之地支速查表
 * @Array Of Property
 * @trans['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥']
 * @return Cn string
 */
-var Zhi = ['\u5b50', '\u4e11', '\u5bc5', '\u536f', '\u8fb0', '\u5df3', '\u5348', '\u672a', '\u7533', '\u9149', '\u620c', '\u4ea5']
+// var Zhi = ['\u5b50', '\u4e11', '\u5bc5', '\u536f', '\u8fb0', '\u5df3', '\u5348', '\u672a', '\u7533', '\u9149', '\u620c', '\u4ea5']
+var Zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
 /**
 * 天干地支之地支速查表<=>生肖
 * @Array Of Property
 * @trans['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪']
 * @return Cn string
 */
-var Animals = ['\u9f20', '\u725b', '\u864e', '\u5154', '\u9f99', '\u86c7', '\u9a6c', '\u7f8a', '\u7334', '\u9e21', '\u72d7', '\u732a']
+// var Animals = ['\u9f20', '\u725b', '\u864e', '\u5154', '\u9f99', '\u86c7', '\u9a6c', '\u7f8a', '\u7334', '\u9e21', '\u72d7', '\u732a']
+var Animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
 /**
 * 24节气速查表
 * @Array Of Property
 * @trans['小寒','大寒','立春','雨水','惊蛰','春分','清明','谷雨','立夏','小满','芒种','夏至','小暑','大暑','立秋','处暑','白露','秋分','寒露','霜降','立冬','小雪','大雪','冬至']
 * @return Cn string
 */
-var solarTerm = ['\u5c0f\u5bd2', '\u5927\u5bd2', '\u7acb\u6625', '\u96e8\u6c34', '\u60ca\u86f0', '\u6625\u5206', '\u6e05\u660e', '\u8c37\u96e8', '\u7acb\u590f', '\u5c0f\u6ee1', '\u8292\u79cd', '\u590f\u81f3', '\u5c0f\u6691', '\u5927\u6691', '\u7acb\u79cb', '\u5904\u6691', '\u767d\u9732', '\u79cb\u5206', '\u5bd2\u9732', '\u971c\u964d', '\u7acb\u51ac', '\u5c0f\u96ea', '\u5927\u96ea', '\u51ac\u81f3']
+// var solarTerm = ['\u5c0f\u5bd2', '\u5927\u5bd2', '\u7acb\u6625', '\u96e8\u6c34', '\u60ca\u86f0', '\u6625\u5206', '\u6e05\u660e', '\u8c37\u96e8', '\u7acb\u590f', '\u5c0f\u6ee1', '\u8292\u79cd', '\u590f\u81f3', '\u5c0f\u6691', '\u5927\u6691', '\u7acb\u79cb', '\u5904\u6691', '\u767d\u9732', '\u79cb\u5206', '\u5bd2\u9732', '\u971c\u964d', '\u7acb\u51ac', '\u5c0f\u96ea', '\u5927\u96ea', '\u51ac\u81f3']
+var solarTerm = ['小寒', '大寒', '立春', '雨水','驚蟄', '春分', '清明', '穀雨', '立夏', '小滿', '芒種', '夏至', '小暑', '大暑', '立秋', '處暑', '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至']
 /**
 * 1900-2100各年的24节气日期速查表
 * @Array Of Property
@@ -151,7 +155,8 @@ var nStr2 = ['\u521d', '\u5341', '\u5eff', '\u5345']
 * @trans ['正','一','二','三','四','五','六','七','八','九','十','冬','腊']
 * @return Cn string
 */
-var nStr3 = ['\u6b63', '\u4e8c', '\u4e09', '\u56db', '\u4e94', '\u516d', '\u4e03', '\u516b', '\u4e5d', '\u5341', '\u51ac', '\u814a']
+// var nStr3 = ['\u6b63', '\u4e8c', '\u4e09', '\u56db', '\u4e94', '\u516d', '\u4e03', '\u516b', '\u4e5d', '\u5341', '\u51ac', '\u814a']
+var nStr3 = ['正', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '臘']
 /**
 * 返回农历y年一整年的总天数
 * @param lunar Year
@@ -780,13 +785,14 @@ clockModule.prototype = {
 			ctx.fill();
 		}
 		var datetime = function (hour, minute, clockdate, lunardate, lunartime) {
-			titletime.innerHTML = clockdate + "<span>" + hour + "</span>:<span>" + (minute.toString().length < 2 ? '0' + minute.toString() : minute.toString()) + "</span><br/>" + lunardate + '<br/>' + lunartime;
+			titletime.innerHTML = clockdate + "<span>" + hour + "</span>:<span>" + (minute.toString().length < 2 ? '0' + minute.toString() : minute.toString()) + "</span><br/>" + weekdate + "<br/>" + lunardate + '<br/>' + lunartime;
 		}
 		var draw = function () {
 			ctx.clearRect(0, 0, width, height);
 			var timezone = clockparameter.timezone; //目标时区时间
 			var offset_GMT = new Date().getTimezoneOffset(); // 本地时间和格林威治的时间差，单位为分钟
 			var nowDate = new Date().getTime(); // 本地时间距 1970 年 1 月 1 日午夜（GMT 时间）之间的毫秒数
+			var nowDay = new Date().getDay();
 			var targetDate = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
 			var hour = targetDate.getHours();
 			var minute = targetDate.getMinutes();
@@ -795,7 +801,8 @@ clockModule.prototype = {
 			var ChinaYear = Year - 1911;
 			var Month = targetDate.getMonth() + 1;
 			var Dates = targetDate.getDate();
-			var clockdate = "民國" + ChinaYear + "年（" + Year + "）" + Month + "月" + Dates + "日";
+			var clockdate = "民國" + ChinaYear + "年" + Month + "月" + Dates + "日";
+			var weekdate = "西元" + Year + "年， 星期" + nStr1[nowDay];
 			var lunarDate = calendarFormatter.solar2lunar(Year, Month, Dates);
 			var lunardate = lunarDate.gzYear + '(' + lunarDate.Animal + ')' + '年' + lunarDate.IMonthCn[0] + '(' + lunarDate.gzMonth + ')' + '月' + lunarDate.IDayCn + '(' + lunarDate.gzDay + ')日';
 			var lunartime = time_to_shichen(hour, minute);
@@ -803,7 +810,7 @@ clockModule.prototype = {
 			drawSecond(second);
 			drawMinute(minute);
 			drawhHour(hour, minute);
-			datetime(hour, minute, clockdate, lunardate, lunartime)
+			datetime(hour, minute, clockdate, weekdate, lunardate, lunartime)
 			drawDot();
 			ctx.restore();
 		}

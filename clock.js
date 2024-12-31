@@ -784,7 +784,7 @@ clockModule.prototype = {
 			ctx.arc(0, 0, 3, 0, 2 * Math.PI, false);
 			ctx.fill();
 		}
-		var datetime = function (hour, minute, clockdate, lunardate, lunartime) {
+		var datetime = function (hour, minute, clockdate, weekdate, lunardate, lunartime) {
 			titletime.innerHTML = clockdate + "<span>" + hour + "</span>:<span>" + (minute.toString().length < 2 ? '0' + minute.toString() : minute.toString()) + "</span><br/>" + weekdate + "<br/>" + lunardate + '<br/>' + lunartime;
 		}
 		var draw = function () {

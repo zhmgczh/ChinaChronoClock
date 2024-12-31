@@ -449,7 +449,8 @@ function solar2lunar(y, m, d) { // 参数区间1900.1.31~2100.12.31
 	var gzD = toGanZhi(dayCyclical + d - 1)
 	// 该日期所属的星座
 	var astro = toAstro(m, d)
-	return { 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? '\u95f0' : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': '\u661f\u671f' + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro }
+	// return { 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? '\u95f0' : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': '\u661f\u671f' + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro }
+	return { 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? '閏' : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': '\u661f\u671f' + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro }
 }
 var calendarFormatter = {
 	// 传入阳历年月日获得详细的公历、农历object信息 <=>JSON
@@ -804,6 +805,8 @@ clockModule.prototype = {
 			var clockdate = "民國" + ChinaYear + "年" + Month + "月" + Dates + "日";
 			var weekdate = "西元" + Year + "年&nbsp;&nbsp;星期" + nStr1[nowDay];
 			var lunarDate = calendarFormatter.solar2lunar(Year, Month, Dates);
+			var weekdate = "西元" + Year + "年&nbsp;&nbsp;星期" + nStr1[nowDay] + "&nbsp;&nbsp;";
+			weekdate += lunarDate.isTerm ? "今天" + lunarDate.Term : lunarDate.Term + "已過" ;
 			var lunardate = lunarDate.gzYear + '(' + lunarDate.Animal + ')' + '年' + lunarDate.IMonthCn[0] + '(' + lunarDate.gzMonth + ')' + '月' + lunarDate.IDayCn + '(' + lunarDate.gzDay + ')日';
 			var lunartime = time_to_shichen(hour, minute);
 			drawAround();

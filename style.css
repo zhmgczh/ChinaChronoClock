@@ -1,0 +1,395 @@
+root {
+	display: block;
+}
+
+html,
+body,
+div,
+label,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+p,
+blockquote,
+th,
+td,
+img,
+textarea {
+	border: 0px;
+	margin: 0px;
+	outline: 0px;
+	padding: 0px;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+img {
+	display: inline-block;
+}
+
+html {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+:focus {
+	outline: 0;
+}
+
+li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+}
+
+em,
+i,
+u {
+	font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+	font-family: "Microsoft YaHei"
+}
+
+abbr,
+acronym {
+	border: 0;
+	font-variant: normal;
+}
+
+input,
+button,
+textarea,
+select,
+optgroup,
+option {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+code,
+kbd,
+samp,
+tt {
+	font-size: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	*font-size: 100%;
+	font-family: "Microsoft YaHei";
+}
+
+ol,
+ul {
+	list-style: none outside none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption,
+th {
+	text-align: left;
+}
+
+:link,
+ :visited,
+ins {
+	text-decoration: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+*,
+*:before,
+*:after,
+:after,
+ :before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+* {
+	touch-action: none;
+}
+
+body {
+	padding-bottom: 0;
+	background-color: #ffffff;
+	min-height: 100%;
+	height: 100%;
+	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #393939;
+	line-height: 1.5;
+}
+
+.clearfix:after {
+	display: block;
+	content: ".";
+	height: 0;
+	visibility: hidden;
+	clear: both;
+	font-size: 0;
+	line-height: 0;
+}
+
+.contenter {
+	margin: 0 auto;
+	width: 1000px;
+	height: 563px;
+	position: relative;
+	z-index: 1;
+	background: url(images/bg1.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.header-top {
+	height: 60px;
+	position: absolute;
+	z-index: 11;
+	background: rgba(0, 0, 0, 0.3);
+	width: 100%;
+	top: 0px;
+	left: 0px
+}
+
+.bottonstyle {
+	height: 70px;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	position: absolute;
+	z-index: 11;
+	background: rgba(0, 0, 0, 0.3);
+}
+.tianqi {
+	float: right;
+	padding: 5px;
+}
+
+.gundong {
+	float: left;
+	width: 600px;
+	padding: 10px;
+	height: 60px;
+	overflow: hidden;
+	white-space: nowrap;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+#scroll_div{
+	white-space: nowrap;
+	color: #FFFFFF;
+	font-size: 15px;
+	height: 40px;
+	line-height: 35px;
+	width: 550px;
+	overflow: hidden;
+}
+.icont{ background: url(images/xx.png) no-repeat; background-size: 100% 100%; display: block;float: left; width: 30px; height: 30px; margin-top: 5px;}
+ul.line {
+	width: 550px;
+	height: 40px;
+	overflow: hidden;
+	float: left;
+}
+#scroll_begin,#scroll_end {display: inline;}
+ul.line li {
+	height: 40px;
+	text-indent: 15px;
+	font-size: 15px;
+	line-height: 40px;
+	list-style: none;
+	color: #FFFFFF;
+	font-weight: bold;
+	overflow: hidden;
+}
+.munlist{  width: 800px; height: 80px;position: absolute;z-index: 22;bottom: 40px; left: 100px;}
+.munlist li{ margin: 10px; float: left; color: #FFFFFF; text-align: center; font-size: 14px;}
+.munlist li img{ width: 70px; height: 70px; margin-bottom: 5px;}
+.munlist li.addmenu{ background: url(images/bj.png) no-repeat;background-size: 100% 100%; width: 70px; height: 70px;}
+.indexstyle .list-info,
+.indexstyle .right-info{ width: 250px;float: left; padding: 10px 20px; height: 80px;text-align: center;}
+.indexstyle .menulist{width: 500px; float: left; height: 80px;position: relative;z-index: 12;}
+.indexstyle .list-info img,
+.indexstyle .right-info img {width: 80%;}
+.indexstyle .right-info img {width: 60%;}
+.indexstyle .menulist .menustyle{position: absolute; bottom: 20px;left: 0px; z-index: 13;}
+.indexstyle .menulist .menustyle li{ float: left; width: 100px; padding: 0px 10px; text-align: center; color: #FFFFFF; font-size:14px; position: relative;z-index: 15; top:20px}
+.indexstyle .menulist .menustyle li.iconmenu img{ width: 60px; height: 60px;}
+.indexstyle .menulist .menustyle li.xmlogon img{ width: 80px; height: 80px;}
+.indexstyle .menulist .menustyle li.xmlogon{top:0}
+.headline{ height: 60px; width: 100%; position: relative;z-index: 11;}
+.headline .menutitle{ margin:0px 190px; padding: 5px 0px;}
+.headline .menutitle a{ float: left; margin: 0px 20px; color: rgba(255,255,255,0.6);font-size: 18px;line-height: 50px; font-weight: bold;}
+.headline .menutitle a.active{color: rgba(255,255,255,1);}
+.applicationlist{ padding: 50px;}
+.applicationlist li{border-radius: 5px; overflow: hidden; cursor:pointer;}
+.applicationmain{ float: left; height: 400px; width: 200px;position: relative;z-index: 11; margin-right: 20px;}
+.applicationtitle{position: absolute; bottom:0;background: rgba(0,0,0,0.6);font-weight: bold;font-size: 16px; left: 0px; width:100%; height: 40px; line-height: 40px; text-align: center; overflow: hidden; padding:0px 10px;color:rgba(255,255,255,0.8);}
+.applicationname{ height: 190px; width: 200px; float: left;position: relative;z-index: 11}
+.trundletitle{background: rgba(255,255,255,0.5); margin:20px; height: 40px; padding:5px 10px; border-radius: 25px; width: 960px;}
+.trundletitle ul.line{width: 900px; height: 30px; float: left;}
+.trundletitle ul.line li{ height: 30px; line-height: 30px;}
+.trundletitle .newsicon{background: url(images/xx.png) no-repeat; background-size: 100% 100%; display: block;float: left; width: 30px; height: 30px; margin-top: 0px;}
+.Columnlist{width: 900px; height: 100px; position: absolute;z-index: 11; bottom: 50px;padding: 10px 0px; left: 50px;}
+.Columnlist .Columnname{ width: 110px; float: left; text-align: center;color: #FFFFFF; padding: 0px 10px;cursor: pointer;}
+.Columnlist .Columnname img{ width: 90px; height: 90px;}
+/**************************/
+.editinfo{padding: 30px;}
+.editinfo li{  min-height: 40px;
+    line-height: 40px;
+    position: relative;
+    margin-bottom: 10px;
+    z-index: 1;}
+.editinfo li .labelname{
+	   float: left;
+    text-align: right;
+    padding-right: 10px;
+    height: 35px;
+    line-height: 35px;
+    color:#555555;
+    min-width: 110px;
+}
+.compile{
+	width: 100%;
+    position: relative;
+    padding-left: 110px;
+    display: block;
+}
+.checkedstatus{display: block;}
+.text_input{ height: 30px; line-height: 30px;padding: 0px 5px; border: 1px solid #333333;}
+.btn {
+    display: inline-block;
+    border-style: solid;
+    padding:5px 10px;
+    border-width: 1px;
+    border-color: #FFF;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+    z-index: 111;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+}
+/****************************/
+.SelectionBox{margin-right: 15px; font-weight: 100;}
+.verUpload-application{
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	color: #FFFFFF;
+	background: #0785D1;
+	position: relative;
+	z-index: 9;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 13px;
+	cursor: pointer;
+	
+}
+.verUpload-application .uploadFileLodaingText{ height: 15px; line-height: 15px;}
+.verUpload-application .uploadFileListItems{ line-height: 20px; border-bottom:0px;}
+.verUpload-application .verUpload_editimg{width: 0; height: 0;}
+.verUpload-application .uploadFileList{margin: 0;}
+.verUpload-application .uploadFilesBox {
+	width: 200px;
+	padding:0px 0px;
+	margin-bottom: 0;
+	left: 120px;
+}
+.verUpload-application .verUpload_files{
+	display: block;
+	width:100px;
+	height: 35px;
+	position: relative;
+	z-index: 11;
+	top: -35px;
+	left: 0px;
+}
+.verUpload-application .uploadFilesBox{ }
+.verUpload {
+	width: 144px;
+	height: 144px;
+	border: 2px dashed #DDDDDD;
+	position: relative;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.verUpload_files {
+	display: block;
+	width: 140px;
+	height: 140px;
+	position: absolute;
+	z-index: 11;
+	top: 0px;
+	left: 0px;
+}
+.verUpload .prompt {
+	position: absolute;
+	bottom: 0px;
+	z-index: 10;
+	width: 100%;
+	left: 0px;
+	text-align: center;
+}
+
+.verUpload input {
+	width: 140px;
+	height: 140px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}

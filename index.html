@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate">
+	<meta HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+	<meta HTTP-EQUIV="expires" CONTENT="0">
+	<meta charset="UTF-8">
+	<meta name="google-site-verification" content="LxuOudJbIfQC4XGqAbPdZp_UAzL0IHJuWJWyp2ISwHo" />
+	<meta name="baidu-site-verification" content="code-9XQnizEi5v" />
+	<meta name="sogou_site_verification" content="6zVRNtO7pp"/>
+	<meta name="keywords"  content="中國,中国,時辰,时辰,計時法,计时法,鐘,钟" />
+	<meta name="description" content="提供傳統中國計時法的顯示服務和五個傳統中國時區的標準時間，適合用作屏幕保護、時間顯示、占卜預測。提供传统中国计时法的显示服务和五个传统中国时区的标准时间，适合用作屏幕保护、时间显示、占卜预测。" />
+	<!-- <link rel="stylesheet" href="style.css" /> -->
+	<title>中國時辰鐘</title>
+	<script src="clock.js"></script>
+	<script type="text/javascript">
+		function IsPC() {
+			var userAgent = navigator.userAgent;
+			var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgent.indexOf(Agents[v]) > 0) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+		function setCookie(cname, cvalue, exdays) {
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+			var expires = "expires=" + d.toGMTString();
+			document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+		function getCookie(cname) {
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i].trim();
+				if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+			}
+			return "";
+		}
+		function height() {
+			return self.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+		}
+		function width() {
+			return self.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		}
+		function dynamicLoadCss(url) {
+			var head = document.getElementsByTagName('head')[0];
+			var link = document.createElement('link');
+			link.type = 'text/css';
+			link.rel = 'stylesheet';
+			link.href = url;
+			head.appendChild(link);
+		}
+		if (width() * 0.95 >= 250 * 5) {
+			dynamicLoadCss('style.css');
+		}
+		else {
+			alert('推薦在電腦上瀏覽，請記住我們的網址：time.caiyiwen.tech\n推荐在电脑上浏览，请记住我们的网址：time.caiyiwen.tech\n請向下滑動！如果文字過小，請放大或橫屏。\n请向下滑动！如果文字过小，请放大或横屏。');
+		}
+		function before_enter_full_screen() {
+			// alert("before");
+			setCookie('fullscreen', 'true', 1);
+			location.reload();
+		}
+		function after_enter_full_screen() {
+			// alert('after');
+			location.reload();
+		}
+		function exit_full_screen() {
+			// alert('exit');
+			location.reload();
+		}
+		document.addEventListener("webkitfullscreenchange", function () {//
+			if (document.webkitIsFullScreen) {
+				after_enter_full_screen();
+				//全屏后要执行的代码
+			} else {
+				exit_full_screen();
+				//退出全屏后执行的代码
+			}
+		}, false);
+		document.addEventListener("fullscreenchange", function () {
+			if (document.fullscreen) {
+				after_enter_full_screen();
+				//全屏后执行的代码
+			} else {
+				exit_full_screen();
+				//退出全屏后要执行的代码
+			}
+		}, false);
+		document.addEventListener("mozfullscreenchange", function () {
+			if (document.mozFullScreen) {
+				after_enter_full_screen();
+				//全屏后要执行的代码
+			} else {
+				exit_full_screen();
+				//退出全屏后要执行的代码
+			}
+		}, false);
+		document.addEventListener("msfullscreenchange", function () {
+			if (document.msFullscreenElement) {
+				after_enter_full_screen();
+				//全屏后要执行的代码
+			} else {
+				exit_full_screen();
+				//退出全屏后要执行的代码
+			}
+		}, false);
+		function process_keyup(e) {
+			if (e.keyCode == 122) {//捕捉F11键盘动作
+				// e.preventDefault();  //阻止F11默认动作
+				before_enter_full_screen();
+				//监听不同浏览器的全屏事件，并件执行相应的代码
+				// 	var el = document.documentElement;
+				// 	var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;//定义不同浏览器的全屏API
+				// 　　//执行全屏
+				// 	if (typeof rfs != "undefined" && rfs) {
+				// 			rfs.call(el);
+				// 	} else if(typeof window.ActiveXObject != "undefined"){
+				// 			var wscript = new ActiveXObject("WScript.Shell");
+				// 			if (wscript!=null) {
+				// 				wscript.SendKeys("{F11}");
+				// 			}
+				// 	}
+				document.addEventListener('keyup', process_keyup);
+				document.onkeyup = process_keyup;
+				document.onkeydown = null;
+				document.onkeypress = null;
+			}
+		}
+		document.addEventListener('keyup', process_keyup);
+		document.onkeyup = process_keyup;
+			// document.onkeydown=null;
+			// document.onkeypress=null;
+	</script>
+	<style type="text/css">
+		.clockModule {
+			/* width: 250px; */
+			height: 220px;
+			text-align: center;
+			margin: 20px;
+			padding: 0px 0px 110px 0px;
+			float: left;
+			color: #FFFFFF;
+			font-size: 16px;
+			font-weight: bold;
+			text-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+		}
+		.canvasbox {
+			background: #FFFFFF;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+		.titletime {
+			font-size: 16px;
+			font-weight: bold;
+			margin: 10px 0px;
+		}
+		.clockbg {
+			background: url(images/bg2.jpg);
+			width: 100%;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			/* overflow-y:hidden; */
+		}
+		.clockstyle {
+			/* padding: 20px 0px; */
+			padding: 1% 0% 1% 0%;
+			/* width: 1460px; */
+			width: 95%;
+			/* height: 400px; */
+			height: 55%;
+			border: 1px solid #008CD5;
+			/* position: absolute; */
+			position: relative;
+			z-index: 11;
+			left: 50%;
+			/* margin-left: -730px; */
+			margin-left: -47.5%;
+			/* top: 50%; */
+			top: 33.5%;
+			/* margin-top: -180px; */
+			margin-top: -10%;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 10px;
+			box-shadow: inset 0px 5px 8px rgba(255, 255, 255, 0.5);
+			align-content: center;
+		}
+		.titledate {
+			font-size: 32px;
+			text-align: center;
+			color: #FFFFFF;
+			font-weight: bold;
+			text-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+			position: relative;
+			top: 15%
+		}
+		.fanhui {
+			background: url(images/cz2.png);
+			position: absolute;
+			z-index: 11;
+			right: 20px;
+			bottom: 20px;
+			width: 120px;
+			height: 40px;
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+	</style>
+	<link rel="shortcut icon" href="images/caiyiwen.ico" type="image/x-icon">
+	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+	<script>LA.init({id: "Jdy4fuyomxQqAw3y",ck: "Jdy4fuyomxQqAw3y"})</script>
+</head>
+<body class="clockbg" id="clockbg">
+	<div id="title_prompt" class="titledate">
+		<font size="20">中國時辰鐘</font><br />
+		<font size="5px" style="color: red">請按F11進入全屏模式</font>
+	</div>
+	<div class="clockstyle" id="clockstyle">
+		<div id="clockModule1" class="clockModule"></div>
+		<div id="clockModule2" class="clockModule"></div>
+		<div id="clockModule3" class="clockModule"></div>
+		<div id="clockModule4" class="clockModule"></div>
+		<div id="clockModule5" class="clockModule"></div>
+	</div>
+	<a target="_blank" href="https://www.caiyiwen.tech/">
+		<div class="fanhui"></div>
+	</a>
+	<script type="text/javascript">
+		if (getCookie('fullscreen') != '') {
+			document.getElementById('title_prompt').innerHTML = '<font size="20">中國時辰鐘</font><br/><font size="5px" style="color: red">&nbsp;</font>';
+		}
+		var clock_width = 250;
+		if (width() * 0.95 < 250 * 5) {
+			clock_width = width() * 0.95;
+		}
+		else {
+			// clock_width = width() / 6.144;
+			clock_width = width() / 6.2;
+		}
+		for (var i = 1; i <= 5; ++i) {
+			document.getElementById('clockModule' + i).style.width = clock_width + 'px';
+			// document.getElementById('clockModule'+i).style.height=clock_width*0.88+'px';
+		}
+		if (width() * 0.95 < 250 * 5) {
+			// alert('This is not PC!');
+			document.getElementById("clockbg").style.height = '2250px';
+			document.getElementById("clockbg").style.overflow = 'auto';
+			document.getElementById("clockstyle").style.top = '250px';
+			document.getElementById("clockstyle").style.height = '1850px';
+			document.getElementById("title_prompt").style.top = '100px';
+			document.getElementById("title_prompt").innerHTML = '<font size="20">中國時辰鐘</font><br/><font size="5px" style="color: red">time.caiyiwen.tech</font>';
+		}
+		else {
+			// alert("This is PC!");
+			document.getElementById("clockbg").style.height = height() + 'px';
+			document.getElementById("clockstyle").style.height = '400px';
+			// document.getElementById("clockbg").style.overflow = 'auto';
+		}
+		new clockModule({
+			Module: ["#clockModule1", "#clockModule2", "#clockModule3", "#clockModule4", "#clockModule5"],//需要时钟的模块名称
+			clockparameter: [{
+				timezone: '8',//时钟显示时区
+				cw: 200,//时钟宽度
+				ch: 200,//时钟高度
+				bgcolor: "#25f500",//时钟背景颜色
+				cityName: '中原時區',//时钟时区城市
+				cityEnglish: '南京、北京、臺北',//外文名称，不一定是英文
+				font: '18px Arial'//时钟大小字体
+			},
+			{
+				timezone: '8.5',
+				cw: 200,
+				ch: 200,
+				cityName: '長白時區',
+				cityEnglish: '綏化、哈爾濱、吉林',
+				font: '18px Arial'
+			},
+			{
+				timezone: '7',
+				bgcolor: "#000000",
+				Minutehand: "#ffffff",//时钟分针颜色
+				Hourhand: "#ffffff",//时钟时针颜色
+				zscolor: "#f00",//刻度颜色
+				cityName: '隴蜀時區',
+				textcolor: "#ffffff",//时钟数字颜色
+				brimcolor: "#f00",//时钟边框颜色
+				cityEnglish: '成都、重慶、貴陽、銀川',
+				font: '18px Arial'
+			},
+			{
+				timezone: '6',
+				bgcolor: "#000000",
+				Minutehand: "#ffffff",//时钟分针颜色
+				Hourhand: "#ffffff",//时钟时针颜色
+				zscolor: "#f00",//刻度颜色
+				cityName: '新藏時區',
+				textcolor: "#ffffff",//时钟数字颜色
+				brimcolor: "#f00",//时钟边框颜色
+				cityEnglish: '拉薩、烏魯木齊',
+				font: '18px Arial'
+			},
+			{
+				timezone: '5.5',
+				bgcolor: "#000000",
+				Minutehand: "#ffffff",//时钟分针颜色
+				Hourhand: "#ffffff",//时钟时针颜色
+				zscolor: "#f00",//刻度颜色
+				cityName: '昆侖時區',
+				textcolor: "#ffffff",//时钟数字颜色
+				brimcolor: "#f00",//时钟边框颜色
+				cityEnglish: '喀什',
+				font: '18px Arial'
+			}]//对单独时钟设置参数
+		})
+	</script>
+	</script>
+	<script>
+		(function () {
+			var src = "https://s.ssl.qhres2.com/ssl/ab77b6ea7f3fbf79.js";
+			document.write('<script src="' + src + '" id="sozz"><\/script>');
+		})();
+	</script>
+</body>
+</html>

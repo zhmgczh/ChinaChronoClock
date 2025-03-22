@@ -2,6 +2,8 @@
 
 這個項目「中國時辰鐘」是一個專門用於顯示中國五大時區（中原時間、長白時間、隴蜀時間、新藏時間、崑崙時間）的時鐘應用程式。它不僅能夠顯示準確的時鐘時間，還包括：
 
+- 中華民國紀年。
+- 二十四節氣。
 - 中國傳統的時辰（如子時、丑時等）和刻數。
 - 當天當時的干支（天干地支）。
 
@@ -11,6 +13,8 @@
 
 The "ChinaChronoClock" project is a specialized clock application designed to display the time for China's five major time zones. Beyond just showing the clock time, this application includes:
 
+- Republic of China calendar.
+- Twenty-four Solar Terms.
 - Traditional Chinese hours (e.g., Zi, Chou, etc.) and quarters of an hour.
 - The Heavenly Stems and Earthly Branches for the day and the time.
 

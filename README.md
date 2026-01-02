@@ -1,6 +1,6 @@
 # 中文
 
-（注意，本倉庫的全部內容均採用雙重授權協議發佈，原始碼和網站內容的授權條款分開。再利用、複製和改編前請仔細閱讀[LICENSE](LICENSE)檔案，並做好適當標注。）
+（注意，本倉庫的所有內容均採用MIT授權協議發佈。再利用、複製和改編前請仔細閱讀[LICENSE](LICENSE)檔案，並做好適當標注。）
 
 這個項目「中國時辰鐘」是一個專門用於顯示中國五大時區（中原時間、長白時間、隴蜀時間、新藏時間、崑崙時間）的時鐘應用程式。它不僅能夠顯示準確的時鐘時間，還包括：
 
@@ -13,7 +13,7 @@
 
 # English
 
-(Note that all content in this repository is released under a dual license, with separate license terms for the source code and website content. Please carefully read the [LICENSE](LICENSE) file and properly credit the content before reusing, copying, or adapting it.)
+(Note that all content in this repository is released under the MIT license. Please carefully read the [LICENSE](LICENSE) file and properly credit the content before reusing, copying, or adapting it.)
 
 The "ChinaChronoClock" project is a specialized clock application designed to display the time for China's five major time zones. Beyond just showing the clock time, this application includes:
 

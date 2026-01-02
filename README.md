@@ -13,6 +13,8 @@
 
 # English
 
+(Note that all content in this repository is released under a dual license, with separate license terms for the source code and website content. Please carefully read the [LICENSE](LICENSE) file and properly credit the content before reusing, copying, or adapting it.)
+
 The "ChinaChronoClock" project is a specialized clock application designed to display the time for China's five major time zones. Beyond just showing the clock time, this application includes:
 
 - Republic of China calendar.

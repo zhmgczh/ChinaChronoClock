@@ -164,7 +164,7 @@ function time_to_shichen(hour, minute) {
     "刻"
   );
 }
-function clockModule(options) {
+export function clockModule(options) {
   this._initial(options);
 }
 clockModule.prototype = {
@@ -537,6 +537,3 @@ clockModule.prototype = {
     setInterval(draw, 1000);
   },
 };
-export function clockModule(options) {
-  this._initial(options);
-}

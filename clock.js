@@ -1,6 +1,6 @@
-import { getSolar } from "./lunar_bridge.js";
+import { SolarPromise } from "./lunar_bridge.js";
 import { SearchSunLongitude } from "./astronomy.js";
-const Solar = getSolar();
+const Solar = await SolarPromise;
 const weekday = "日一二三四五六";
 const gan = "甲乙丙丁戊己庚辛壬癸";
 const zhi = "子丑寅卯辰巳午未申酉戌亥";
@@ -126,7 +126,6 @@ function parse_date(date_string) {
   );
 }
 function get_china_lunisolar_date(year, month, date, hour, minute, second) {
-  console.log(Solar)
   const solar = Solar.fromYmdHms(year, month, date, hour, minute, second);
   const lunisolar_date = solar.getLunar();
   const jieqi = lunisolar_date.getPrevJieQi(false);

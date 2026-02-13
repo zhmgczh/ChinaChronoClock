@@ -20,17 +20,14 @@
     <!-- <link rel="stylesheet" href="style.css" /> -->
     <title>中國時辰鐘</title>
     <style type="text/css">
-      .clockModule {
-        /* width: 250px; */
-        height: 220px;
-        text-align: center;
-        margin: 20px;
-        padding: 0px 0px 110px 0px;
-        float: left;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: bold;
-        text-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      body.clockbg {
+        padding-bottom: 80px !important;
+        box-sizing: border-box;
       }
       .canvasbox {
         background: #ffffff;
@@ -46,32 +43,38 @@
         background: url(images/bg2.jpg);
         width: 100%;
         height: 100%;
+        min-height: 100vh;
         background-repeat: no-repeat;
         background-size: 100% 100%;
+        position: relative;
         /* overflow-y:hidden; */
       }
       .clockstyle {
-        /* padding: 20px 0px; */
-        padding: 1% 0% 1% 0%;
-        /* width: 1460px; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
         width: 95%;
-        /* height: 400px; */
-        height: 55%;
-        border: 1px solid #008cd5;
-        /* position: absolute; */
+        margin: 20px auto;
         position: relative;
-        z-index: 11;
-        left: 50%;
-        /* margin-left: -730px; */
-        margin-left: -47.5%;
-        /* top: 50%; */
-        top: 33.5%;
-        /* margin-top: -180px; */
-        margin-top: -10%;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 10px;
+        min-height: 400px;
+        z-index: 11;
+        padding: 20px;
+        border: 1px solid #008cd5;
         box-shadow: inset 0px 5px 8px rgba(255, 255, 255, 0.5);
         align-content: center;
+      }
+      .clockModule {
+        flex: 0 1 250px;
+        height: auto;
+        text-align: center;
+        margin: 30px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        text-shadow: 0px 3px 5px rgba(0, 0, 0, 1);
       }
       .titledate {
         font-size: 32px;
@@ -93,14 +96,50 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
       }
+      .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .radio-item {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+      .settings-btn {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        color: #ffffff;
+        cursor: pointer;
+        z-index: 100;
+        filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.8));
+        transition: transform 0.5s ease;
+      }
+      .settings-btn {
+        position: absolute;
+        z-index: 11;
+        left: 20px;
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        color: #ffffff;
+        cursor: pointer;
+        filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 1));
+        transition: transform 0.5s ease;
+      }
+      .settings-btn:hover {
+        transform: rotate(90deg);
+        color: #008cd5;
+      }
     </style>
     <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon" />
   </head>
   <body class="clockbg" id="clockbg">
     <div id="title_prompt" class="titledate">
-      <font size="20">中國時辰鐘</font><br />
-      <!-- 		<font size="5px" style="color: red">請按F11進入全屏模式</font> -->
-      <font size="5px" style="color: red">&nbsp;</font>
+      <h1 style="font-size: 50px">中國時辰鐘</h1>
     </div>
     <div class="clockstyle" id="clockstyle">
       <div id="clockModule1" class="clockModule"></div>
@@ -109,199 +148,177 @@
       <div id="clockModule4" class="clockModule"></div>
       <div id="clockModule5" class="clockModule"></div>
     </div>
+    <div id="select_time_zone" style="display: none">
+      <h2 style="text-align: center">選擇時區</h2>
+      <form
+        id="timezone_form"
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+        "
+      >
+        <div class="radio-group">
+          <div class="radio-item">
+            <input
+              type="radio"
+              checked
+              id="wuda"
+              name="timezone"
+              value="all"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="wuda">五大時區</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="zhongyuan"
+              name="timezone"
+              value="8"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="zhongyuan">中原時區 (UTC+8)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="changbai"
+              name="timezone"
+              value="8.5"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="changbai">長白時區 (UTC+8:30)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="longshu"
+              name="timezone"
+              value="7"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="longshu">隴蜀時區 (UTC+7)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="xinzang"
+              name="timezone"
+              value="6"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="xinzang">新藏時區 (UTC+6)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="kunlun"
+              name="timezone"
+              value="5.5"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="kunlun">崑崙時區 (UTC+5:30)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="custom"
+              name="timezone"
+              value="custom"
+              onchange="
+                change_timezone(document.getElementById('utc-offset').value)
+              "
+            />
+            <label for="custom">自定義時區</label>
+          </div>
+        </div>
+        <div id="custom-select-container" style="display: none">
+          <label for="utc-offset">選擇自定義時區：</label>
+          <select id="utc-offset" name="custom_offset"></select>
+        </div>
+      </form>
+    </div>
+    <div class="settings-btn" id="settings-btn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
     <a target="_blank" href="/">
       <div class="fanhui"></div>
     </a>
     <script type="module">
+      const all_china_time_zones = [
+        {
+          timezone: "5.5",
+          bgcolor: "#000000",
+          Minutehand: "#ffffff", //时钟分针颜色
+          Hourhand: "#ffffff", //时钟时针颜色
+          zscolor: "#f00", //刻度颜色
+          cityName: "崑崙時區",
+          textcolor: "#ffffff", //时钟数字颜色
+          brimcolor: "#f00", //时钟边框颜色
+          cityEnglish: "喀什",
+          font: "18px Arial",
+        },
+        {
+          timezone: "6",
+          bgcolor: "#000000",
+          Minutehand: "#ffffff", //时钟分针颜色
+          Hourhand: "#ffffff", //时钟时针颜色
+          zscolor: "#f00", //刻度颜色
+          cityName: "新藏時區",
+          textcolor: "#ffffff", //时钟数字颜色
+          brimcolor: "#f00", //时钟边框颜色
+          cityEnglish: "拉薩、烏魯木齊",
+          font: "18px Arial",
+        },
+        {
+          timezone: "7",
+          bgcolor: "#000000",
+          Minutehand: "#ffffff", //时钟分针颜色
+          Hourhand: "#ffffff", //时钟时针颜色
+          zscolor: "#f00", //刻度颜色
+          cityName: "隴蜀時區",
+          textcolor: "#ffffff", //时钟数字颜色
+          brimcolor: "#f00", //时钟边框颜色
+          cityEnglish: "成都、重慶、貴陽、銀川",
+          font: "18px Arial",
+        },
+        {
+          timezone: "8", //时钟显示时区
+          cw: 200, //时钟宽度
+          ch: 200, //时钟高度
+          bgcolor: "#25f500", //时钟背景颜色
+          cityName: "中原時區", //时钟时区城市
+          cityEnglish: "南京、北平、上海、臺北", //外文名称，不一定是英文
+          font: "18px Arial", //时钟大小字体
+        },
+        {
+          timezone: "8.5",
+          cw: 200,
+          ch: 200,
+          cityName: "長白時區",
+          cityEnglish: "綏化、哈爾濱、吉林",
+          font: "18px Arial",
+        },
+      ];
       import { clockModule } from "./clock.js";
-      function IsPC() {
-        var userAgent = navigator.userAgent;
-        var Agents = [
-          "Android",
-          "iPhone",
-          "SymbianOS",
-          "Windows Phone",
-          "iPad",
-          "iPod",
-        ];
-        var flag = true;
-        for (var v = 0; v < Agents.length; v++) {
-          if (userAgent.indexOf(Agents[v]) > 0) {
-            flag = false;
-            break;
-          }
-        }
-        return flag;
-      }
-      function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        var expires = "expires=" + d.toGMTString();
-        document.cookie = cname + "=" + cvalue + "; " + expires;
-      }
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(";");
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i].trim();
-          if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-        }
-        return "";
-      }
-      function height() {
-        return (
-          self.innerHeight ||
-          document.documentElement.clientHeight ||
-          document.body.clientHeight
-        );
-      }
-      function width() {
-        return (
-          self.innerWidth ||
-          document.documentElement.clientWidth ||
-          document.body.clientWidth
-        );
-      }
-      function dynamicLoadCss(url) {
-        var head = document.getElementsByTagName("head")[0];
-        var link = document.createElement("link");
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        link.href = url;
-        head.appendChild(link);
-      }
-      if (width() * 0.95 >= 250 * 5) {
-        dynamicLoadCss("style.css");
-      } else {
-        alert(
-          "推薦在電腦上瀏覽，請記住我們的網址。\n請向下滑動！如果文字過小，請放大或橫屏。",
-        );
-      }
-      function before_enter_full_screen() {
-        // alert("before");
-        setCookie("fullscreen", "true", 1);
-        location.reload();
-      }
-      function after_enter_full_screen() {
-        // alert('after');
-        location.reload();
-      }
-      function exit_full_screen() {
-        // alert('exit');
-        location.reload();
-      }
-      document.addEventListener(
-        "webkitfullscreenchange",
-        function () {
-          //
-          if (document.webkitIsFullScreen) {
-            after_enter_full_screen();
-            //全屏后要执行的代码
-          } else {
-            exit_full_screen();
-            //退出全屏后执行的代码
-          }
-        },
-        false,
-      );
-      document.addEventListener(
-        "fullscreenchange",
-        function () {
-          if (document.fullscreen) {
-            after_enter_full_screen();
-            //全屏后执行的代码
-          } else {
-            exit_full_screen();
-            //退出全屏后要执行的代码
-          }
-        },
-        false,
-      );
-      document.addEventListener(
-        "mozfullscreenchange",
-        function () {
-          if (document.mozFullScreen) {
-            after_enter_full_screen();
-            //全屏后要执行的代码
-          } else {
-            exit_full_screen();
-            //退出全屏后要执行的代码
-          }
-        },
-        false,
-      );
-      document.addEventListener(
-        "msfullscreenchange",
-        function () {
-          if (document.msFullscreenElement) {
-            after_enter_full_screen();
-            //全屏后要执行的代码
-          } else {
-            exit_full_screen();
-            //退出全屏后要执行的代码
-          }
-        },
-        false,
-      );
-      function process_keyup(e) {
-        if (e.keyCode == 122) {
-          //捕捉F11键盘动作
-          // e.preventDefault();  //阻止F11默认动作
-          before_enter_full_screen();
-          //监听不同浏览器的全屏事件，并件执行相应的代码
-          // 	var el = document.documentElement;
-          // 	var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;//定义不同浏览器的全屏API
-          // 　　//执行全屏
-          // 	if (typeof rfs != "undefined" && rfs) {
-          // 			rfs.call(el);
-          // 	} else if(typeof window.ActiveXObject != "undefined"){
-          // 			var wscript = new ActiveXObject("WScript.Shell");
-          // 			if (wscript!=null) {
-          // 				wscript.SendKeys("{F11}");
-          // 			}
-          // 	}
-          document.addEventListener("keyup", process_keyup);
-          document.onkeyup = process_keyup;
-          document.onkeydown = null;
-          document.onkeypress = null;
-        }
-      }
-      document.addEventListener("keyup", process_keyup);
-      document.onkeyup = process_keyup;
-      // document.onkeydown=null;
-      // document.onkeypress=null;
-      if (getCookie("fullscreen") != "") {
-        document.getElementById("title_prompt").innerHTML =
-          '<font size="20">中國時辰鐘</font><br/><font size="5px" style="color: red">&nbsp;</font>';
-      }
-      var clock_width = 250;
-      if (width() * 0.95 < 250 * 5) {
-        clock_width = width() * 0.95;
-      } else {
-        // clock_width = width() / 6.144;
-        clock_width = width() / 6.2;
-      }
-      for (var i = 1; i <= 5; ++i) {
-        document.getElementById("clockModule" + i).style.width =
-          clock_width + "px";
-        // document.getElementById('clockModule'+i).style.height=clock_width*0.88+'px';
-      }
-      if (width() * 0.95 < 250 * 5) {
-        // alert('This is not PC!');
-        document.getElementById("clockbg").style.height = "2250px";
-        document.getElementById("clockbg").style.overflow = "auto";
-        document.getElementById("clockstyle").style.top = "250px";
-        document.getElementById("clockstyle").style.height = "1850px";
-        document.getElementById("title_prompt").style.top = "100px";
-        document.getElementById("title_prompt").innerHTML =
-          '<font size="20">中國時辰鐘</font><br/><font size="5px" style="color: red">zhmgczh.github.io</font>';
-      } else {
-        // alert("This is PC!");
-        document.getElementById("clockbg").style.height = height() + "px";
-        document.getElementById("clockstyle").style.height = "400px";
-        // document.getElementById("clockbg").style.overflow = 'auto';
-      }
-      new clockModule({
+      const clock_module = new clockModule({
         Module: [
           "#clockModule1",
           "#clockModule2",
@@ -309,62 +326,180 @@
           "#clockModule4",
           "#clockModule5",
         ], //需要时钟的模块名称
-        clockparameter: [
-          {
-            timezone: "8", //时钟显示时区
-            cw: 200, //时钟宽度
-            ch: 200, //时钟高度
-            bgcolor: "#25f500", //时钟背景颜色
-            cityName: "中原時區", //时钟时区城市
-            cityEnglish: "南京、北平、上海、臺北", //外文名称，不一定是英文
-            font: "18px Arial", //时钟大小字体
-          },
-          {
-            timezone: "8.5",
-            cw: 200,
-            ch: 200,
-            cityName: "長白時區",
-            cityEnglish: "綏化、哈爾濱、吉林",
-            font: "18px Arial",
-          },
-          {
-            timezone: "7",
-            bgcolor: "#000000",
-            Minutehand: "#ffffff", //时钟分针颜色
-            Hourhand: "#ffffff", //时钟时针颜色
-            zscolor: "#f00", //刻度颜色
-            cityName: "隴蜀時區",
-            textcolor: "#ffffff", //时钟数字颜色
-            brimcolor: "#f00", //时钟边框颜色
-            cityEnglish: "成都、重慶、貴陽、銀川",
-            font: "18px Arial",
-          },
-          {
-            timezone: "6",
-            bgcolor: "#000000",
-            Minutehand: "#ffffff", //时钟分针颜色
-            Hourhand: "#ffffff", //时钟时针颜色
-            zscolor: "#f00", //刻度颜色
-            cityName: "新藏時區",
-            textcolor: "#ffffff", //时钟数字颜色
-            brimcolor: "#f00", //时钟边框颜色
-            cityEnglish: "拉薩、烏魯木齊",
-            font: "18px Arial",
-          },
-          {
-            timezone: "5.5",
-            bgcolor: "#000000",
-            Minutehand: "#ffffff", //时钟分针颜色
-            Hourhand: "#ffffff", //时钟时针颜色
-            zscolor: "#f00", //刻度颜色
-            cityName: "崑崙時區",
-            textcolor: "#ffffff", //时钟数字颜色
-            brimcolor: "#f00", //时钟边框颜色
-            cityEnglish: "喀什",
-            font: "18px Arial",
-          },
-        ], //对单独时钟设置参数
+        clockparameter: all_china_time_zones,
       });
+      function checkMultiLine() {
+        const container = document.getElementById("clockstyle");
+        const clocks = container.getElementsByClassName("clockModule");
+        if (clocks.length < 2) return false;
+        const firstTop = clocks[0].offsetTop;
+        let isMultiLine = false;
+        for (let i = 1; i < clocks.length; i++) {
+          if (clocks[i].offsetTop > firstTop) {
+            isMultiLine = true;
+            break;
+          }
+        }
+        // if (isMultiLine) {
+        //   alert("當前狀態：多行佈局");
+        // } else {
+        //   alert("當前狀態：單行佈局");
+        // }
+        return isMultiLine;
+      }
+      // window.addEventListener("load", checkMultiLine);
+      // window.addEventListener("resize", checkMultiLine);
+      const radioButtons = document.querySelectorAll('input[name="timezone"]');
+      const customContainer = document.getElementById(
+        "custom-select-container",
+      );
+      const utcSelect = document.getElementById("utc-offset");
+      function get_current_timezone() {
+        const offsetMinutes = new Date().getTimezoneOffset();
+        const offsetHours = -offsetMinutes / 60;
+        return offsetHours.toString();
+      }
+      const current_timezone = get_current_timezone();
+      function generateUTCOptions() {
+        for (let h = -12; h <= 14; h += 0.25) {
+          const totalMinutes = h * 60;
+          const hours = Math.floor(Math.abs(totalMinutes) / 60);
+          const minutes = Math.abs(totalMinutes) % 60;
+          const sign = h >= 0 ? "+" : "-";
+          const displayTime = `UTC${sign}${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+          const option = document.createElement("option");
+          option.value = h.toString();
+          option.textContent = displayTime;
+          if (option.value === current_timezone) {
+            option.selected = true;
+          }
+          utcSelect.appendChild(option);
+        }
+        utcSelect.addEventListener("change", function (event) {
+          change_timezone(event.target.value);
+        });
+      }
+      radioButtons.forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          if (e.target.value === "custom") {
+            customContainer.style.display = "block";
+          } else {
+            customContainer.style.display = "none";
+          }
+        });
+      });
+      generateUTCOptions();
+      const clock_styles = document.getElementById("clockstyle");
+      const clock_module_template = "#clockModule?";
+      const clock_style_template =
+        '<div id="clockModule?" class="clockModule"></div>';
+      const time_zone_template = {
+        timezone: "",
+        cw: 200,
+        ch: 200,
+        cityName: "境外",
+        bgcolor: "#a9d0f5",
+        cityEnglish: "",
+        font: "18px Arial",
+      };
+      function corresponding_utc_string(timezone) {
+        const timezone_num = new Number(timezone);
+        let sign = "+";
+        if (timezone_num < 0) {
+          sign = "-";
+        }
+        const abs_timezone_num = Math.abs(timezone_num);
+        const abs_timezone_int = Math.floor(abs_timezone_num);
+        const abs_timezone_part = abs_timezone_num - abs_timezone_int;
+        const abs_timezone =
+          abs_timezone_int.toString().padStart(2, "0") +
+          ":" +
+          (abs_timezone_part * 60).toString().padStart(2, "0");
+        return "UTC" + sign + abs_timezone;
+      }
+      const timezone_form = document.getElementById("timezone_form");
+      function swich_setting(timezone) {
+        const radio_items = timezone_form.children[0].children;
+        let have_checked = false;
+        for (const child of radio_items) {
+          const radio = child.children[0];
+          if (radio.value === timezone) {
+            radio.checked = true;
+            have_checked = true;
+          } else {
+            radio.checked = false;
+          }
+        }
+        if (have_checked) {
+          return;
+        }
+        radio_items[radio_items.length - 1].children[0].checked = true;
+        const utc_offset = timezone_form.children[1].children[1].children;
+        for (const option of utc_offset) {
+          if (option.value === timezone) {
+            option.selected = true;
+          } else {
+            option.selected = false;
+          }
+        }
+        timezone_form.children[1].style.display = "block";
+      }
+      function change_timezone(timezone) {
+        let new_time_zones = null;
+        if ("all" === timezone) {
+          new_time_zones = all_china_time_zones;
+        } else {
+          for (let i = 0; i < all_china_time_zones.length; ++i) {
+            if (all_china_time_zones[i].timezone === timezone) {
+              new_time_zones = [all_china_time_zones[i]];
+              break;
+            }
+          }
+          if (null === new_time_zones) {
+            time_zone_template.timezone = timezone;
+            time_zone_template.cityEnglish = corresponding_utc_string(timezone);
+            new_time_zones = [time_zone_template];
+          }
+        }
+        clock_module.par.Module.length = 0;
+        const childen_length = clock_styles.children.length;
+        for (let i = 0; i < childen_length; ++i) {
+          clock_styles.removeChild(clock_styles.children[0]);
+        }
+        for (let i = 0; i < new_time_zones.length; ++i) {
+          const index = (i + 1).toString();
+          clock_module.par.Module.push(
+            clock_module_template.replace("?", index),
+          );
+          const fragment = document
+            .createRange()
+            .createContextualFragment(clock_style_template.replace("?", index));
+          const node = fragment.firstElementChild;
+          clock_styles.appendChild(node);
+        }
+        clock_module.par.clockparameter = new_time_zones;
+        clock_module.show(clock_module.par, clock_module);
+        localStorage.setItem("default_timezone", timezone);
+      }
+      window.change_timezone = change_timezone;
+      const default_timezone = localStorage.getItem("default_timezone");
+      if (null !== default_timezone) {
+        change_timezone(default_timezone);
+        swich_setting(default_timezone);
+      } else if (checkMultiLine()) {
+        change_timezone(current_timezone);
+        swich_setting(current_timezone);
+      }
+      const select_time_zone = document.getElementById("select_time_zone");
+      document
+        .getElementById("settings-btn")
+        .addEventListener("click", function () {
+          if (select_time_zone.style.display === "block") {
+            select_time_zone.style.display = "none";
+          } else {
+            select_time_zone.style.display = "block";
+          }
+        });
     </script>
     <!-- Google tag (gtag.js) -->
     <script

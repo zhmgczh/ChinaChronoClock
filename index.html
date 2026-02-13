@@ -20,7 +20,8 @@
     <!-- <link rel="stylesheet" href="style.css" /> -->
     <title>中國時辰鐘</title>
     <script type="module" src="clock.js"></script>
-    <script type="text/javascript">
+    <script type="module">
+      import { clockModule } from "./clock.js";
       function IsPC() {
         var userAgent = navigator.userAgent;
         var Agents = [
@@ -271,7 +272,7 @@
     <a target="_blank" href="/">
       <div class="fanhui"></div>
     </a>
-    <script type="module">
+    <script type="text/javascript">
       if (getCookie("fullscreen") != "") {
         document.getElementById("title_prompt").innerHTML =
           '<font size="20">中國時辰鐘</font><br/><font size="5px" style="color: red">&nbsp;</font>';

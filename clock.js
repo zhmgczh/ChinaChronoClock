@@ -537,4 +537,6 @@ clockModule.prototype = {
     setInterval(draw, 1000);
   },
 };
-window.clockModule = clockModule;
+export function clockModule(options) {
+  this._initial(options);
+}

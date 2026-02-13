@@ -457,6 +457,11 @@
           }
           if (null === new_time_zones) {
             time_zone_template.timezone = timezone;
+            if (current_timezone === timezone) {
+              time_zone_template.cityName = "您當前的時區";
+            } else {
+              time_zone_template.cityName = "境外";
+            }
             time_zone_template.cityEnglish = corresponding_utc_string(timezone);
             new_time_zones = [time_zone_template];
           }

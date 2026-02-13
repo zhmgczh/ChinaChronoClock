@@ -171,7 +171,20 @@ export function clockModule(options) {
 }
 clockModule.prototype = {
   constructor: this,
+  destroy: function () {
+    if (this.intervals) {
+      this.intervals.forEach((id) => clearInterval(id));
+      this.intervals = [];
+    }
+    this.par.Module.forEach((selector) => {
+      const el = document.querySelector(selector);
+      if (el) {
+        el.innerHTML = "";
+      }
+    });
+  },
   _initial: function (options) {
+    this.intervals = [];
     const par = {
       Module: [],
       clocksize: [200, 200],
@@ -536,6 +549,7 @@ clockModule.prototype = {
       ctx.restore();
     };
     draw();
-    setInterval(draw, 1000);
+    const interval_id = setInterval(draw, 1000);
+    clock.intervals.push(interval_id);
   },
 };

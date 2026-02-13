@@ -347,6 +347,16 @@
         const offsetHours = -offsetMinutes / 60;
         return offsetHours.toString();
       }
+      function get_current_timezone_from_longitude(longitude) {
+        const rawOffset = longitude / 15;
+        const roundedOffset = (Math.round(rawOffset * 2) / 2).toString();
+        for (const timezone of all_china_time_zones) {
+          if (roundedOffset === timezone.timezone) {
+            return roundedOffset;
+          }
+        }
+        return null;
+      }
       function get_current_timezone_from_gps() {
         return new Promise((resolve, reject) => {
           if (!navigator.geolocation) {
@@ -356,9 +366,7 @@
           navigator.geolocation.getCurrentPosition(
             (position) => {
               const lon = position.coords.longitude;
-              const rawOffset = lon / 15;
-              const roundedOffset = Math.round(rawOffset * 2) / 2;
-              resolve(roundedOffset.toString());
+              resolve(get_current_timezone_from_longitude(lon));
             },
             (error) => {
               reject("無法獲取位置: " + error.message);
@@ -379,9 +387,7 @@
           if (request.status === 200) {
             var data = JSON.parse(request.responseText);
             var lon = data.longitude;
-            var rawOffset = lon / 15;
-            var roundedOffset = Math.round(rawOffset * 2) / 2;
-            return roundedOffset.toString();
+            return get_current_timezone_from_longitude(lon);
           } else {
             return null;
           }
@@ -511,21 +517,22 @@
             }
           }
           if (null === new_time_zones) {
-            time_zone_template.timezone = timezone;
+            const time_zone_copy = { ...time_zone_template };
+            time_zone_copy.timezone = timezone;
             if (current_timezone === timezone) {
-              time_zone_template.cityName = "當地時區";
+              time_zone_copy.cityName = "當地時區";
             } else {
-              time_zone_template.cityName = "境外";
+              time_zone_copy.cityName = "境外";
             }
-            time_zone_template.cityEnglish = corresponding_utc_string(timezone);
-            new_time_zones = [time_zone_template];
+            time_zone_copy.cityEnglish = corresponding_utc_string(timezone);
+            new_time_zones = [time_zone_copy];
           }
         }
-        clock_module.par.Module.length = 0;
-        const childen_length = clock_styles.children.length;
-        for (let i = 0; i < childen_length; ++i) {
-          clock_styles.removeChild(clock_styles.children[0]);
+        if (clock_module.destroy) {
+          clock_module.destroy();
         }
+        clock_module.par.Module.length = 0;
+        clock_styles.innerHTML = "";
         for (let i = 0; i < new_time_zones.length; ++i) {
           const index = (i + 1).toString();
           clock_module.par.Module.push(

@@ -1,6 +1,7 @@
-import { SolarPromise } from "./lunar_bridge.js";
+import { SolarPromise, LunarPromise } from "./lunar_bridge.js";
 import { SearchSunLongitude } from "./astronomy.js";
 const Solar = await SolarPromise;
+const Lunar = await LunarPromise;
 const weekday = "日一二三四五六";
 const gan = "甲乙丙丁戊己庚辛壬癸";
 const zhi = "子丑寅卯辰巳午未申酉戌亥";
@@ -157,7 +158,10 @@ function get_china_lunisolar_date(year, month, date, hour, minute, second) {
     ganzhi_date: ganzhi_date,
   };
 }
-function time_to_shichen(hour, minute) {
+function time_to_shichen(year, month, date, hour, minute, second) {
+  const gan = Lunar.fromDate(
+    new Date(year, month - 1, date, hour, minute, second),
+  ).getTimeGan();
   const shi = zhi.charAt(Math.floor(((hour + 1) % 24) / 2));
   const suffix = xiaoshi.charAt(Math.floor((hour + 1) % 2));
   const dashike = jike.charAt(
@@ -165,7 +169,20 @@ function time_to_shichen(hour, minute) {
   );
   const xiaoshike = jike.charAt(Math.floor(minute / 15));
   return (
-    shi + "時" + dashike + "刻&nbsp;&nbsp;" + shi + suffix + xiaoshike + "刻"
+    "(" +
+    gan +
+    ")" +
+    shi +
+    "時" +
+    dashike +
+    "刻&nbsp;&nbsp;" +
+    "(" +
+    gan +
+    ")" +
+    shi +
+    suffix +
+    xiaoshike +
+    "刻"
   );
 }
 export function clockModule(options) {
@@ -542,7 +559,14 @@ clockModule.prototype = {
         "(" +
         china_lunisolar_date.ganzhi_date +
         ")日";
-      const china_time = time_to_shichen(hour, minute);
+      const china_time = time_to_shichen(
+        year,
+        month,
+        date,
+        hour,
+        minute,
+        second,
+      );
       drawAround();
       drawSecond(second);
       drawMinute(minute);

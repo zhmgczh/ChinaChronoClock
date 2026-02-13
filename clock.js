@@ -392,6 +392,7 @@ clockModule.prototype = {
     const r = width / 2;
     const rem = width / 200;
     const drawAround = function () {
+      ctx.restore();
       ctx.save();
       ctx.beginPath();
       ctx.translate(r, r);
@@ -423,7 +424,6 @@ clockModule.prototype = {
         ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
         ctx.fill();
       }
-      ctx.restore();
     };
     const drawhHour = function (hour, minute) {
       ctx.save();

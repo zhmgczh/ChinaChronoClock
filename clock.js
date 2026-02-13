@@ -90,7 +90,7 @@ const date_dictionary = [
   "三十",
 ];
 const xiaoshi = "初正";
-const jike = "初一二三";
+const jike = "初一二三四五六七";
 const msInDay = 1000 * 60 * 60 * 24;
 function get_interval_days(
   a_year,
@@ -158,11 +158,12 @@ function get_china_lunisolar_date(year, month, date, hour, minute, second) {
   };
 }
 function time_to_shichen(hour, minute) {
+  const shi = zhi.charAt(((hour + 1) % 24) / 2);
+  const suffix = xiaoshi.charAt((hour + 1) % 2);
+  const dashike = jike.charAt(((hour + 1) % 2) * 60 + minute / 15);
+  const xiaoshike = jike.charAt(minute / 15);
   return (
-    zhi.charAt(((hour + 1) % 24) / 2) +
-    xiaoshi.charAt((hour + 1) % 2) +
-    jike.charAt(minute / 15) +
-    "刻"
+    shi + "時" + dashike + "刻&nbsp;&nbsp;" + shi + suffix + xiaoshike + "刻"
   );
 }
 export function clockModule(options) {

@@ -126,7 +126,8 @@ function parse_date(date_string) {
   );
 }
 function get_china_lunisolar_date(year, month, date, hour, minute, second) {
-  const solar = Solar.fromYmd(year, month, date);
+  console.log(Solar)
+  const solar = Solar.fromYmdHms(year, month, date, hour, minute, second);
   const lunisolar_date = solar.getLunar();
   const jieqi = lunisolar_date.getPrevJieQi(false);
   const jieqi_time = parse_date(jieqi.getSolar().toYmdHms());

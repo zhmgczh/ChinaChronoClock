@@ -411,7 +411,6 @@ clockModule.prototype = {
     const r = width / 2;
     const rem = width / 200;
     const drawAround = function () {
-      ctx.restore();
       ctx.save();
       ctx.beginPath();
       ctx.translate(r, r);
@@ -501,11 +500,9 @@ clockModule.prototype = {
       titletime.innerHTML =
         clockdate +
         "&nbsp;&nbsp;<span>" +
-        hour +
+        hour.toString().padStart(2, "0") +
         "</span>:<span>" +
-        (minute.toString().length < 2
-          ? "0" + minute.toString()
-          : minute.toString()) +
+        minute.toString().padStart(2, "0") +
         "</span><br/>" +
         weekdate +
         "<br/>" +

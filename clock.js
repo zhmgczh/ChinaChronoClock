@@ -1,5 +1,6 @@
-import { Solar } from "./lunar.js";
+import { getSolar } from "./lunar_bridge.js";
 import { SearchSunLongitude } from "./astronomy.js";
+const Solar = getSolar();
 const weekday = "日一二三四五六";
 const gan = "甲乙丙丁戊己庚辛壬癸";
 const zhi = "子丑寅卯辰巳午未申酉戌亥";

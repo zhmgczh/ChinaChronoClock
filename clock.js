@@ -504,13 +504,13 @@ clockModule.prototype = {
       const target_date = new Date(
         now_date + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000,
       );
-      const hour = target_date.getUTCHours();
-      const minute = target_date.getUTCMinutes();
-      const second = target_date.getUTCSeconds();
-      const year = target_date.getUTCFullYear();
+      const hour = target_date.getHours();
+      const minute = target_date.getMinutes();
+      const second = target_date.getSeconds();
+      const year = target_date.getFullYear();
       const china_year = "中華民國" + (year - 1911);
-      const month = target_date.getUTCMonth() + 1;
-      const date = target_date.getUTCDate();
+      const month = target_date.getMonth() + 1;
+      const date = target_date.getDate();
       const clockdate = china_year + "年" + month + "月" + date + "日";
       const china_lunisolar_date = get_china_lunisolar_date(
         year,
@@ -524,7 +524,7 @@ clockModule.prototype = {
         "西元" +
         year +
         "年&nbsp;&nbsp;星期" +
-        weekday.charAt(target_date.getUTCDay()) +
+        weekday.charAt(target_date.getDay()) +
         "&nbsp;&nbsp;" +
         china_lunisolar_date.solar_term;
       const china_date =

@@ -160,7 +160,7 @@ function get_china_lunisolar_date(year, month, date, hour, minute, second) {
 function time_to_shichen(hour, minute) {
   const shi = zhi.charAt(((hour + 1) % 24) / 2);
   const suffix = xiaoshi.charAt((hour + 1) % 2);
-  const dashike = jike.charAt(((hour + 1) % 2) * 60 + minute / 15);
+  const dashike = jike.charAt((((hour + 1) % 2) * 60 + minute) / 15);
   const xiaoshike = jike.charAt(minute / 15);
   return (
     shi + "時" + dashike + "刻&nbsp;&nbsp;" + shi + suffix + xiaoshike + "刻"

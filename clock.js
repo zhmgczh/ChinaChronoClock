@@ -423,6 +423,7 @@ clockModule.prototype = {
         ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
         ctx.fill();
       }
+      ctx.restore();
     };
     const drawhHour = function (hour, minute) {
       ctx.save();

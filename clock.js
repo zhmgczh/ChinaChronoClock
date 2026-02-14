@@ -329,6 +329,7 @@ clockModule.prototype = {
     clock.par.expandmethod(clock);
   },
   clocksite: function (doc, clock, clockparameter) {
+    const dpr = window.devicePixelRatio || 1;
     let kdcolor,
       zscolor,
       Minutehand,
@@ -365,6 +366,12 @@ clockModule.prototype = {
       canvasbox.height = clockparameter.ch;
       canvasbox.width = clockparameter.cw;
     }
+    const cssWidth = canvasbox.width;
+    const cssHeight = canvasbox.height;
+    canvasbox.width = cssWidth * dpr;
+    canvasbox.height = cssHeight * dpr;
+    canvasbox.style.width = cssWidth + "px";
+    canvasbox.style.height = cssHeight + "px";
     if (clockparameter.bgcolor == null) {
       canvasbox.style.backgroundColor = clock.par.clockbgcolor;
     } else {
@@ -406,8 +413,9 @@ clockModule.prototype = {
       brimcolor = clockparameter.brimcolor;
     }
     const ctx = canvasbox.getContext("2d");
-    const width = ctx.canvas.clientWidth;
-    const height = ctx.canvas.clientHeight;
+    ctx.scale(dpr, dpr);
+    const width = cssWidth;
+    const height = cssHeight;
     const r = width / 2;
     const rem = width / 200;
     const drawAround = function () {
@@ -513,18 +521,16 @@ clockModule.prototype = {
     const draw = function () {
       ctx.clearRect(0, 0, width, height);
       const timezone = clockparameter.timezone;
-      const offset_GMT = new Date().getTimezoneOffset();
-      const now_date = new Date().getTime();
       const target_date = new Date(
-        now_date + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000,
+        Date.now() + timezone * 60 * 60 * 1000,
       );
-      const hour = target_date.getHours();
-      const minute = target_date.getMinutes();
-      const second = target_date.getSeconds();
-      const year = target_date.getFullYear();
+      const hour = target_date.getUTCHours();
+      const minute = target_date.getUTCMinutes();
+      const second = target_date.getUTCSeconds();
+      const year = target_date.getUTCFullYear();
       const china_year = "中華民國" + (year - 1911);
-      const month = target_date.getMonth() + 1;
-      const date = target_date.getDate();
+      const month = target_date.getUTCMonth() + 1;
+      const date = target_date.getUTCDate();
       const clockdate = china_year + "年" + month + "月" + date + "日";
       const china_lunisolar_date = get_china_lunisolar_date(
         year,
@@ -538,7 +544,7 @@ clockModule.prototype = {
         "西元" +
         year +
         "年&nbsp;&nbsp;星期" +
-        weekday.charAt(target_date.getDay()) +
+        weekday.charAt(target_date.getUTCDay()) +
         "&nbsp;&nbsp;" +
         china_lunisolar_date.solar_term;
       const china_date =

@@ -272,6 +272,7 @@
               onchange="
                 change_timezone(document.getElementById('utc-offset').value)
               "
+              disabled
             />
             <label for="custom">自定義時區</label>
           </div>
@@ -361,6 +362,7 @@
         },
       ];
       import { clockModule } from "./clock.js";
+      import { get_current_timezone } from "./timezone.js";
       const clock_module = new clockModule({
         Module: [
           "#clockModule1",
@@ -390,100 +392,6 @@
         "custom-select-container",
       );
       const utcSelect = document.getElementById("utc-offset");
-      function get_current_timezone_from_browser() {
-        const offsetMinutes = new Date().getTimezoneOffset();
-        const offsetHours = -offsetMinutes / 60;
-        return offsetHours.toString();
-      }
-      const all_china_time_zone_logitude_centers = [82.5, 90, 105, 120, 127.5];
-      const all_china_time_zone_logitude_range = {
-        82.5: [73, 82.5],
-        90: [82.5, 97.5],
-        105: [97.5, 112.5],
-        120: [112.5, 127.5],
-        127.5: [127.5, 136],
-      };
-      function get_current_timezone_from_longitude(longitude) {
-        for (let i = 0; i < all_china_time_zones.length; ++i) {
-          const current_center = all_china_time_zone_logitude_centers[i];
-          const current_lowerbound =
-            all_china_time_zone_logitude_range[current_center][0];
-          const current_upperbound =
-            all_china_time_zone_logitude_range[current_center][1];
-          if (
-            longitude >= current_lowerbound &&
-            longitude <= current_upperbound
-          ) {
-            return all_china_time_zones[i].timezone;
-          }
-        }
-        return null;
-      }
-      function get_current_timezone_from_gps() {
-        return new Promise((resolve, reject) => {
-          if (!navigator.geolocation) {
-            reject("瀏覽器不支援 GPS 定位");
-            return;
-          }
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const lon = position.coords.longitude;
-              resolve(get_current_timezone_from_longitude(lon));
-            },
-            (error) => {
-              reject("無法獲取位置: " + error.message);
-            },
-            {
-              enableHighAccuracy: true,
-              timeout: 5000,
-              maximumAge: 0,
-            },
-          );
-        });
-      }
-      function get_current_timezone_from_ip() {
-        try {
-          var request = new XMLHttpRequest();
-          request.open("GET", "https://ipapi.co/json/", false);
-          request.send(null);
-          if (request.status === 200) {
-            var data = JSON.parse(request.responseText);
-            var lon = data.longitude;
-            return get_current_timezone_from_longitude(lon);
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.log(error);
-          return null;
-        }
-      }
-      async function get_current_timezone() {
-        const base_current_timezone = get_current_timezone_from_browser();
-        if (
-          base_current_timezone.endsWith(".25") ||
-          base_current_timezone.endsWith(".75")
-        ) {
-          return base_current_timezone;
-        }
-        try {
-          let current_timezone = await get_current_timezone_from_gps();
-          if (current_timezone !== null) {
-            return current_timezone;
-          }
-        } catch (e) {
-          console.log("GPS 定位失敗，轉向 IP 判斷...");
-        }
-        try {
-          let current_timezone = get_current_timezone_from_ip();
-          if (current_timezone !== null) {
-            return current_timezone;
-          }
-        } catch (e) {
-          console.log("IP 判斷失敗...");
-        }
-        return base_current_timezone;
-      }
       function generateUTCOptions(current_timezone) {
         for (let h = -12; h <= 14; h += 0.25) {
           const totalMinutes = h * 60;
@@ -502,6 +410,7 @@
         utcSelect.addEventListener("change", function (event) {
           change_timezone(event.target.value);
         });
+        document.getElementById("custom").disabled = false;
       }
       radioButtons.forEach((radio) => {
         radio.addEventListener("change", (e) => {

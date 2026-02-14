@@ -213,55 +213,7 @@
               value="all"
               onchange="change_timezone(this.value)"
             />
-            <label for="wuda" style="font-weight: bold">五大時區</label>
-          </div>
-          <div class="radio-item">
-            <input
-              type="radio"
-              id="zhongyuan"
-              name="timezone"
-              value="8"
-              onchange="change_timezone(this.value)"
-            />
-            <label for="zhongyuan" style="font-weight: bold"
-              >中原時區 (UTC+08:00)</label
-            >
-          </div>
-          <div class="radio-item">
-            <input
-              type="radio"
-              id="changbai"
-              name="timezone"
-              value="8.5"
-              onchange="change_timezone(this.value)"
-            />
-            <label for="changbai" style="font-weight: bold"
-              >長白時區 (UTC+08:30)</label
-            >
-          </div>
-          <div class="radio-item">
-            <input
-              type="radio"
-              id="longshu"
-              name="timezone"
-              value="7"
-              onchange="change_timezone(this.value)"
-            />
-            <label for="longshu" style="font-weight: bold"
-              >隴蜀時區 (UTC+07:00)</label
-            >
-          </div>
-          <div class="radio-item">
-            <input
-              type="radio"
-              id="xinzang"
-              name="timezone"
-              value="6"
-              onchange="change_timezone(this.value)"
-            />
-            <label for="xinzang" style="font-weight: bold"
-              >新藏時區 (UTC+06:00)</label
-            >
+            <label for="wuda">五大時區</label>
           </div>
           <div class="radio-item">
             <input
@@ -271,9 +223,47 @@
               value="5.5"
               onchange="change_timezone(this.value)"
             />
-            <label for="kunlun" style="font-weight: bold"
-              >崑崙時區 (UTC+05:30)</label
-            >
+            <label for="kunlun">崑崙時區 (UTC+05:30)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="xinzang"
+              name="timezone"
+              value="6"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="xinzang">新藏時區 (UTC+06:00)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="longshu"
+              name="timezone"
+              value="7"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="longshu">隴蜀時區 (UTC+07:00)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="zhongyuan"
+              name="timezone"
+              value="8"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="zhongyuan">中原時區 (UTC+08:00)</label>
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              id="changbai"
+              name="timezone"
+              value="8.5"
+              onchange="change_timezone(this.value)"
+            />
+            <label for="changbai">長白時區 (UTC+08:30)</label>
           </div>
           <div class="radio-item">
             <input
@@ -285,13 +275,11 @@
                 change_timezone(document.getElementById('utc-offset').value)
               "
             />
-            <label for="custom" style="font-weight: bold">自定義時區</label>
+            <label for="custom">自定義時區</label>
           </div>
         </div>
         <div id="custom-select-container" style="display: none">
-          <label for="utc-offset" style="font-weight: bold"
-            >選擇自定義時區：</label
-          >
+          <label for="utc-offset">選擇自定義時區：</label>
           <select id="utc-offset" name="custom_offset"></select>
         </div>
       </form>

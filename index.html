@@ -122,6 +122,29 @@
         transform: rotate(90deg);
         color: #008cd5;
       }
+      .close-btn-style {
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .close-btn-style:hover {
+        background: #008cd5;
+        border-color: #008cd5;
+        transform: scale(1.1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+      .close-btn-style svg {
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5));
+      }
     </style>
     <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon" />
   </head>
@@ -137,7 +160,40 @@
       <div id="clockModule5" class="clockModule"></div>
     </div>
     <div id="select_time_zone" style="display: none">
-      <h2 style="text-align: center">選擇時區</h2>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 25px;
+        "
+      >
+        <h2
+          style="
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.8);
+          "
+        >
+          選擇時區
+        </h2>
+        <div id="close-timezone-btn" class="close-btn-style" title="關閉">
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            stroke="currentColor"
+            stroke-width="3"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+      </div>
       <form
         id="timezone_form"
         style="
@@ -255,47 +311,47 @@
         {
           timezone: "5.5",
           bgcolor: "#000000",
-          Minutehand: "#ffffff", //时钟分针颜色
-          Hourhand: "#ffffff", //时钟时针颜色
-          zscolor: "#f00", //刻度颜色
+          Minutehand: "#ffffff",
+          Hourhand: "#ffffff",
+          zscolor: "#f00",
           cityName: "崑崙時區 (UTC+05:30)",
-          textcolor: "#ffffff", //时钟数字颜色
-          brimcolor: "#f00", //时钟边框颜色
+          textcolor: "#ffffff",
+          brimcolor: "#f00",
           cityEnglish: "喀什",
           font: "18px Arial",
         },
         {
           timezone: "6",
           bgcolor: "#000000",
-          Minutehand: "#ffffff", //时钟分针颜色
-          Hourhand: "#ffffff", //时钟时针颜色
-          zscolor: "#f00", //刻度颜色
+          Minutehand: "#ffffff",
+          Hourhand: "#ffffff",
+          zscolor: "#f00",
           cityName: "新藏時區 (UTC+06:00)",
-          textcolor: "#ffffff", //时钟数字颜色
-          brimcolor: "#f00", //时钟边框颜色
+          textcolor: "#ffffff",
+          brimcolor: "#f00",
           cityEnglish: "拉薩、烏魯木齊",
           font: "18px Arial",
         },
         {
           timezone: "7",
           bgcolor: "#000000",
-          Minutehand: "#ffffff", //时钟分针颜色
-          Hourhand: "#ffffff", //时钟时针颜色
-          zscolor: "#f00", //刻度颜色
+          Minutehand: "#ffffff",
+          Hourhand: "#ffffff",
+          zscolor: "#f00",
           cityName: "隴蜀時區 (UTC+07:00)",
-          textcolor: "#ffffff", //时钟数字颜色
-          brimcolor: "#f00", //时钟边框颜色
+          textcolor: "#ffffff",
+          brimcolor: "#f00",
           cityEnglish: "成都、重慶、貴陽、銀川",
           font: "18px Arial",
         },
         {
-          timezone: "8", //时钟显示时区
-          cw: 200, //时钟宽度
-          ch: 200, //时钟高度
-          bgcolor: "#25f500", //时钟背景颜色
-          cityName: "中原時區 (UTC+08:00)", //时钟时区城市
-          cityEnglish: "南京、北平、上海、臺北", //外文名称，不一定是英文
-          font: "18px Arial", //时钟大小字体
+          timezone: "8",
+          cw: 200,
+          ch: 200,
+          bgcolor: "#25f500",
+          cityName: "中原時區 (UTC+08:00)",
+          cityEnglish: "南京、北平、上海、臺北",
+          font: "18px Arial",
         },
         {
           timezone: "8.5",
@@ -314,7 +370,7 @@
           "#clockModule3",
           "#clockModule4",
           "#clockModule5",
-        ], //需要时钟的模块名称
+        ],
         clockparameter: all_china_time_zones,
       });
       function checkMultiLine() {
@@ -329,15 +385,8 @@
             break;
           }
         }
-        // if (isMultiLine) {
-        //   alert("當前狀態：多行佈局");
-        // } else {
-        //   alert("當前狀態：單行佈局");
-        // }
         return isMultiLine;
       }
-      // window.addEventListener("load", checkMultiLine);
-      // window.addEventListener("resize", checkMultiLine);
       const radioButtons = document.querySelectorAll('input[name="timezone"]');
       const customContainer = document.getElementById(
         "custom-select-container",
@@ -568,6 +617,11 @@
           } else {
             select_time_zone.style.display = "block";
           }
+        });
+      document
+        .getElementById("close-timezone-btn")
+        .addEventListener("click", function () {
+          document.getElementById("select_time_zone").style.display = "none";
         });
       let current_timezone = null;
       async function init() {

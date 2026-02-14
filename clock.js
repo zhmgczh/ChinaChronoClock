@@ -117,14 +117,7 @@ const regex =
   /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2}) (?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})/;
 function parse_date(date_string) {
   const parts = date_string.match(/\d+/g).map(Number);
-  return new Date(
-    parts[0],
-    parts[1] - 1,
-    parts[2],
-    parts[3],
-    parts[4],
-    parts[5],
-  );
+  return new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0);
 }
 function get_china_lunisolar_date(year, month, date, hour, minute, second) {
   const solar = Solar.fromYmdHms(year, month, date, hour, minute, second);
@@ -521,9 +514,7 @@ clockModule.prototype = {
     const draw = function () {
       ctx.clearRect(0, 0, width, height);
       const timezone = clockparameter.timezone;
-      const target_date = new Date(
-        Date.now() + timezone * 60 * 60 * 1000,
-      );
+      const target_date = new Date(Date.now() + timezone * 60 * 60 * 1000);
       const hour = target_date.getUTCHours();
       const minute = target_date.getUTCMinutes();
       const second = target_date.getUTCSeconds();

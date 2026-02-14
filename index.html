@@ -225,6 +225,7 @@
         <div id="custom-select-container" style="display: none">
           <label for="utc-offset">選擇自定義時區：</label>
           <select id="utc-offset" name="custom_offset"></select>
+          <img src="images/中國時區圖.svg" style="width: 100%; height: auto;" />
         </div>
       </form>
     </div>
@@ -347,13 +348,21 @@
         const offsetHours = -offsetMinutes / 60;
         return offsetHours.toString();
       }
+      const all_china_time_zone_logitude_centers = [82.5, 90, 105, 120, 127.5];
       function get_current_timezone_from_longitude(longitude) {
-        const rawOffset = longitude / 15;
-        const roundedOffset = (Math.round(rawOffset * 2) / 2).toString();
-        for (const timezone of all_china_time_zones) {
-          if (roundedOffset === timezone.timezone) {
-            return roundedOffset;
+        let nearest_timezone = null;
+        let smallest_difference = 360;
+        for (let i = 0; i < all_china_time_zones.length; ++i) {
+          const distance = Math.abs(
+            all_china_time_zone_logitude_centers[i] - longitude,
+          );
+          if (distance < smallest_difference) {
+            nearest_timezone = all_china_time_zones[i].timezone;
+            smallest_difference = distance;
           }
+        }
+        if (smallest_difference <= 7.5) {
+          return nearest_timezone;
         }
         return null;
       }

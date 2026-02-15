@@ -163,7 +163,7 @@ function get_china_lunisolar_date(year, month, date, hour, minute, second) {
   };
 }
 function time_to_shichen(year, month, date, hour, minute, second) {
-  const gan = Lunar.fromDate(
+  const gan = Lunar.fromSolar(
     Solar.fromYmdHms(year, month, date, hour, minute, second),
   ).getTimeGan();
   const shi = zhi.charAt(Math.floor(((hour + 1) % 24) / 2));

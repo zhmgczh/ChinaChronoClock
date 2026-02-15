@@ -8,7 +8,10 @@ const all_china_time_zone_longitude_range = {
   127.5: [127.5, 136],
 };
 async function load_geo_data() {
-  const response = await fetch("china.geojson");
+  const current_script_url = new URL(import.meta.url);
+  const response = await fetch(
+    new URL("./china.geojson", current_script_url).href,
+  );
   return await response.json();
 }
 let china_geojson = null;

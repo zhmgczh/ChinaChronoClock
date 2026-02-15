@@ -1,5 +1,5 @@
-const currentScriptUrl = new URL(import.meta.url);
-const lunarScriptPath = new URL("./lunar.js", currentScriptUrl).href;
+const current_script_url = new URL(import.meta.url);
+const lunarScriptPath = new URL("./lunar.js", current_script_url).href;
 let _lunar_load_task = null;
 const load_lunar_script = () => {
   if (window.Solar || window.Lunar) return Promise.resolve();

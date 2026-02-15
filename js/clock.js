@@ -100,9 +100,9 @@ function get_interval_days(
   a_hour,
   a_minute,
   a_second,
-  b_Date,
+  b_utc_timestamp,
 ) {
-  const date1 = new Date(
+  const a_utc_timestamp = Date.UTC(
     a_year,
     a_month - 1,
     a_date,
@@ -110,24 +110,35 @@ function get_interval_days(
     a_minute,
     a_second,
   );
-  const diffInMs = Math.abs(b_Date - date1);
-  return Math.ceil(diffInMs / msInDay);
+  const diffInMs = Math.abs(a_utc_timestamp - b_utc_timestamp);
+  const diff_days = Math.ceil(diffInMs / msInDay);
+  return Math.max(diff_days, 1);
 }
 const regex =
   /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2}) (?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})/;
-function parse_date(date_string) {
+function parse_date_to_utc_timestamp(date_string) {
   const parts = date_string.match(/\d+/g).map(Number);
-  return new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0);
+  return Date.UTC(parts[0], parts[1] - 1, parts[2], 0, 0, 0);
 }
 function get_china_lunisolar_date(year, month, date, hour, minute, second) {
   const solar = Solar.fromYmdHms(year, month, date, hour, minute, second);
   const lunisolar_date = solar.getLunar();
   const jieqi = lunisolar_date.getPrevJieQi(false);
-  const jieqi_time = parse_date(jieqi.getSolar().toYmdHms());
+  const jieqi_utc_timestamp = parse_date_to_utc_timestamp(
+    jieqi.getSolar().toYmdHms(),
+  );
   const solar_term =
     solar_terms_dict[jieqi.getName()] +
     "第" +
-    get_interval_days(year, month, date, hour, minute, second, jieqi_time) +
+    get_interval_days(
+      year,
+      month,
+      date,
+      hour,
+      minute,
+      second,
+      jieqi_utc_timestamp,
+    ) +
     "天";
   const ganzhi_year =
     gan.charAt(lunisolar_date.getYearGanIndex()) +
@@ -153,7 +164,7 @@ function get_china_lunisolar_date(year, month, date, hour, minute, second) {
 }
 function time_to_shichen(year, month, date, hour, minute, second) {
   const gan = Lunar.fromDate(
-    new Date(year, month - 1, date, hour, minute, second),
+    Solar.fromYmdHms(year, month, date, hour, minute, second),
   ).getTimeGan();
   const shi = zhi.charAt(Math.floor(((hour + 1) % 24) / 2));
   const suffix = xiaoshi.charAt(Math.floor((hour + 1) % 2));

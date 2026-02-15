@@ -361,8 +361,7 @@
           font: "18px Arial",
         },
       ];
-      import { clockModule } from "./clock.js";
-      import { get_current_timezone } from "./timezone.js";
+      import { clockModule } from "./js/clock.js";
       const clock_module = new clockModule({
         Module: [
           "#clockModule1",
@@ -536,6 +535,7 @@
         .addEventListener("click", function () {
           document.getElementById("select_time_zone").style.display = "none";
         });
+      import { get_current_timezone } from "./js/timezone.js";
       let current_timezone = null;
       async function init() {
         current_timezone = await get_current_timezone();
